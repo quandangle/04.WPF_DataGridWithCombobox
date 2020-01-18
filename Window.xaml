@@ -1,0 +1,83 @@
+﻿<Window x:Name="MainWindow" x:Class="QApps.AutoJoinWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:qApps="clr-namespace:QApps"
+        mc:Ignorable="d"
+
+        Title="Auto Join" ResizeMode="CanResize"
+        ShowInTaskbar="True" WindowStartupLocation="CenterScreen"
+        Height="630" Width="498.013"
+        Topmost="False" 
+        >
+
+    <FrameworkElement.Resources>
+        <ResourceDictionary Source="../WPF/Resource/Styles.xaml" />
+    </FrameworkElement.Resources>
+
+    <DockPanel LastChildFill="True">
+
+        <DockPanel Height="40" Dock="Bottom">
+            <Button Style="{DynamicResource ButtonStyle}"
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    Content="OK"
+                    Width="80"
+                    Click="ButtonOk_Click" />
+        </DockPanel>
+
+        <DataGrid DockPanel.Dock="Top"
+                  ItemsSource="{Binding AllRules}"
+                  Style="{DynamicResource DataGridStyle}"
+                  AutoGenerateColumns="False"
+                  MinHeight="300" 
+                  MaxHeight="550"
+                  ColumnWidth="*">
+
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn Header="Priority Category">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="qApps:AutoJoinRules">
+                            <ComboBox ItemsSource="{Binding AllCategoryPriority}"
+                                      SelectedItem="{Binding PriorityCategory}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      BorderBrush="White" 
+                                      IsEditable="True" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Join with Category">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="qApps:AutoJoinRules">
+                            <ComboBox ItemsSource="{Binding AllCutCategory}"
+                                      SelectedItem="{Binding JoinWithCategory}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      IsEditable="True" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Reverse"
+                                        Width="70" MinWidth="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="qApps:AutoJoinRules">
+                            <CheckBox
+                                IsChecked="{Binding IsReverse}"
+                                Style="{DynamicResource CheckBoxStyle}"
+                                HorizontalAlignment="Center"
+                                Height="30"
+                                />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </DockPanel>
+</Window>
